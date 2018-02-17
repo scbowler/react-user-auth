@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
 import { renderInput } from '../helpers';
+import { signIn } from '../actions';
 
 class SignIn extends Component {
     handleSignIn(values) {
         console.log('Sign In Form Submitted:', values);
+
+        this.props.signIn(values);
     }
 
     render() {
@@ -18,7 +22,7 @@ class SignIn extends Component {
                     <div className="col s6 offset-s3">
                         <div className="card grey lighten-3">
                             <div className="card-content">
-                                <form onSubmit={handleSubmit(this.handleSignIn)}>
+                                <form onSubmit={handleSubmit(this.handleSignIn.bind(this))}>
                                     <Field component={renderInput} name="email" placeholder="Enter your email" />
                                     <Field component={renderInput} name="password" placeholder="Enter your password" type="password" />
                                     <div className="right-align">
@@ -38,4 +42,4 @@ SignIn = reduxForm({
     form: 'sign-in-form'
 })(SignIn);
 
-export default SignIn;
+export default connect(null, { signIn })(SignIn);
