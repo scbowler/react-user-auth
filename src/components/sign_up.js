@@ -30,6 +30,7 @@ class SignUp extends Component {
                                     <div className="right-align">
                                         <button className="btn blue-grey darken-1">Sign Up</button>
                                     </div>
+                                    <p className="red-text center-align">{this.props.authError}</p>
                                 </form>
                             </div>
                         </div>
@@ -63,4 +64,10 @@ SignUp = reduxForm({
     validate: validate
 })(SignUp);
 
-export default connect(null, { signUp })(SignUp);
+function mapStateToProps(state){
+    return {
+        authError: state.user.error
+    }
+}
+
+export default connect(mapStateToProps, { signUp })(SignUp);
