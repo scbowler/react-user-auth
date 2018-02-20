@@ -8,6 +8,7 @@ import Quote from './quote';
 import SignIn from './sign_in';
 import SignUp from './sign_up';
 import auth from '../hoc/auth';
+import redirect from '../hoc/redirect';
 
 const App = () => (
     <div className="container">
@@ -16,8 +17,8 @@ const App = () => (
         <Route exact path="/" component={Home}/>
         <Route path="/about-us" component={About}/>
         <Route path="/movie-quote" component={auth(Quote)}/>
-        <Route path="/sign-in" component={SignIn}/>
-        <Route path="/sign-up" component={SignUp}/>
+        <Route path="/sign-in" component={redirect(SignIn, '/movie-quote')}/>
+        <Route path="/sign-up" component={redirect(SignUp, '/movie-quote')}/>
     </div>
 );
 
